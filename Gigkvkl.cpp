@@ -198,3 +198,37 @@ int main() {
 
 
 
+
+void task_7() {
+    cout << "=== Задание 7: Игра 'Угадай число' ===" << endl;
+    const int SECRET_NUMBER = 42;
+    int guess;
+    int attempts = 0;
+    const int MAX_ATTEMPTS = 5;
+    
+    cout << "Я загадал число от 1 до 100. У вас " << MAX_ATTEMPTS << " попыток!" << endl;
+    
+    while (attempts < MAX_ATTEMPTS) {
+        cout << "Попытка " << (attempts + 1) << "/" << MAX_ATTEMPTS << ". Ваша догадка: ";
+        cin >> guess;
+        attempts++;
+        
+        string hint = (guess < SECRET_NUMBER) ? "Загаданное число БОЛЬШЕ" :
+                      (guess > SECRET_NUMBER) ? "Загаданное число МЕНЬШЕ" :
+                      "ПОЗДРАВЛЯЮ! Вы угадали!";
+        
+        cout << hint << endl;
+        
+        if (guess == SECRET_NUMBER) {
+            cout << "Вы угадали число за " << attempts << " попыток!" << endl;
+            break;
+        }
+        
+        if (attempts == MAX_ATTEMPTS) {
+            cout << "К сожалению, попытки закончились. Загаданное число было: " << SECRET_NUMBER << endl;
+        }
+    }
+    cout << endl;
+}
+
+
