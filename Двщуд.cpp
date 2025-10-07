@@ -1,26 +1,56 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    double num1, num2;
-    
-    cout << "Введите первое число: ";
+void task_1(){
+      double num1, num2;
+        
+    cout << "Enter second number : ";
     cin >> num1;
-    cout << "Введите второе число: ";
+    cout << "Enter first number:  ";
     cin >> num2;
-    
     switch (num2 == 0) {
-        case true:
-            cout << "Ошибка: деление на ноль!" << endl;
+    case true:
+         cout << "Error" << endl;
             break;
-        case false:
-            cout << "Результат деления: " << num1 / num2 << endl;
+    case false:
+        cout << "result:  " << num1 / num2 << endl;
             break;
     }
-    
-    return 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main(){
+     task_1();
+    */* task_2();
+     task_3();
+     task_4();
+     task_5();
+     task_6();
+     task_7();
+     task_8();
+     task_9();
+     task_10(); */
+ 
+}
 #include <iostream>
 using namespace std;
 
