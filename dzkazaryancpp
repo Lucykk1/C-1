@@ -3,9 +3,8 @@
 #include <ctime>
 using namespace std;
 
-// Task 1: Division of two numbers
 void task_1() {
-    cout << "=== Task 1: Division of Two Numbers ===" << endl;
+
     double num1, num2;
     
     cout << "Enter the first number: ";
@@ -23,10 +22,8 @@ void task_1() {
     }
     cout << endl;
 }
-
-// Task 2: Check if number is three-digit and even
 void task_2() {
-    cout << "=== Task 2: Three-digit Even Number Check ===" << endl;
+ 
     int number;
     
     cout << "Enter a number: ";
@@ -50,9 +47,8 @@ void task_2() {
     cout << endl;
 }
 
-// Task 3: Season and days in month
+
 void task_3() {
-    cout << "=== Task 3: Season and Days in Month ===" << endl;
     int month;
     
     cout << "Enter month number (1-12): ";
@@ -91,9 +87,9 @@ void task_3() {
     cout << endl;
 }
 
-// Task 4: Calculator
+
 void task_4() {
-    cout << "=== Task 4: Calculator ===" << endl;
+
     double num1, num2;
     char operation;
     
@@ -141,9 +137,8 @@ void task_4() {
     cout << endl;
 }
 
-// Task 5: Leap year
 void task_5() {
-    cout << "=== Task 5: Leap Year ===" << endl;
+   
     int year;
     
     cout << "Enter a year: ";
@@ -194,9 +189,8 @@ void task_5() {
     cout << endl;
 }
 
-// Task 6: Smart home
 void task_6() {
-    cout << "=== Task 6: Smart Home ===" << endl;
+   
     bool isDoorOpen;
     int time;
     
@@ -232,10 +226,7 @@ void task_6() {
     cout << endl;
 }
 
-// Task 7: Rock, Paper, Scissors
 void task_7() {
-    cout << "=== Task 7: Rock, Paper, Scissors ===" << endl;
-    srand(time(0));
     
     int userChoice;
     string choices[3] = {"Rock", "Scissors", "Paper"};
@@ -287,36 +278,12 @@ void task_7() {
     cout << endl;
 }
 
-// Main menu
 int main() {
-    int choice;
-    
-    do {
-        cout << "=== MAIN MENU ===" << endl;
-        cout << "1. Division of two numbers" << endl;
-        cout << "2. Three-digit even number check" << endl;
-        cout << "3. Season and days in month" << endl;
-        cout << "4. Calculator" << endl;
-        cout << "5. Leap year" << endl;
-        cout << "6. Smart home" << endl;
-        cout << "7. Rock, Paper, Scissors" << endl;
-        cout << "0. Exit" << endl;
-        cout << "Choose a task: ";
-        cin >> choice;
-        
-        switch (choice) {
-            case 1: task_1(); break;
-            case 2: task_2(); break;
-            case 3: task_3(); break;
-            case 4: task_4(); break;
-            case 5: task_5(); break;
-            case 6: task_6(); break;
-            case 7: task_7(); break;
-            case 0: cout << "Exiting program..." << endl; break;
-            default: cout << "Invalid choice! Please try again." << endl << endl; break;
-        }
-    } while (choice != 0);
-    
-    return 0;
+    task_1(); 
+    task_2();
+    task_3();
+    task_4();
+    task_5(); 
+    task_6(); 
+    task_7(); 
 }
-
