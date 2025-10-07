@@ -9,11 +9,13 @@ int main() {
     cout << "Введите второе число: ";
     cin >> num2;
     
-    if (num2 == 0) {
-        cout << "Ошибка: деление на ноль!" << endl;
-    } else {
-        double result = num1 / num2;
-        cout << "Результат деления: " << result << endl;
+    switch (num2 == 0) {
+        case true:
+            cout << "Ошибка: деление на ноль!" << endl;
+            break;
+        case false:
+            cout << "Результат деления: " << num1 / num2 << endl;
+            break;
     }
     
     return 0;
@@ -28,19 +30,26 @@ int main() {
     cout << "Введите число: ";
     cin >> number;
     
-    if (number >= 100 && number <= 999) {
-        if (number % 2 == 0) {
-            cout << "Число " << number << " является трехзначным и четным" << endl;
-        } else {
-            cout << "Число " << number << " является трехзначным, но нечетным" << endl;
-        }
-    } else {
-        cout << "Число " << number << " не является трехзначным" << endl;
+    // Проверка на трехзначность
+    switch (number >= 100 && number <= 999) {
+        case true:
+            // Проверка на четность
+            switch (number % 2 == 0) {
+                case true:
+                    cout << "Число " << number << " является трехзначным и четным" << endl;
+                    break;
+                case false:
+                    cout << "Число " << number << " является трехзначным, но нечетным" << endl;
+                    break;
+            }
+            break;
+        case false:
+            cout << "Число " << number << " не является трехзначным" << endl;
+            break;
     }
     
     return 0;
 }
-
 
 #include <iostream>
 using namespace std;
@@ -51,35 +60,36 @@ int main() {
     cout << "Введите номер месяца (1-12): ";
     cin >> month;
     
-    if (month < 1 || month > 12) {
-        cout << "Ошибка: введите число от 1 до 12" << endl;
-        return 1;
-    }
-    
-    // Определяем время года
-    string season;
-    if (month == 12 || month == 1 || month == 2) {
-        season = "Зима";
-    } else if (month >= 3 && month <= 5) {
-        season = "Весна";
-    } else if (month >= 6 && month <= 8) {
-        season = "Лето";
-    } else {
-        season = "Осень";
+    switch (month) {
+        case 1: case 2: case 12:
+            cout << "Время года: Зима" << endl;
+            break;
+        case 3: case 4: case 5:
+            cout << "Время года: Весна" << endl;
+            break;
+        case 6: case 7: case 8:
+            cout << "Время года: Лето" << endl;
+            break;
+        case 9: case 10: case 11:
+            cout << "Время года: Осень" << endl;
+            break;
+        default:
+            cout << "Ошибка: введите число от 1 до 12" << endl;
+            return 1;
     }
     
     // Определяем количество дней
-    int days;
-    if (month == 2) {
-        days = 28;
-    } else if (month == 4 || month == 6 || month == 9 || month == 11) {
-        days = 30;
-    } else {
-        days = 31;
+    switch (month) {
+        case 2:
+            cout << "Количество дней: 28" << endl;
+            break;
+        case 4: case 6: case 9: case 11:
+            cout << "Количество дней: 30" << endl;
+            break;
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            cout << "Количество дней: 31" << endl;
+            break;
     }
-    
-    cout << "Время года: " << season << endl;
-    cout << "Количество дней: " << days << endl;
     
     return 0;
 }
@@ -99,48 +109,43 @@ int main() {
     cout << "Введите второе число: ";
     cin >> num2;
     
-    double result;
-    bool error = false;
-    
     switch (operation) {
         case '+':
-            result = num1 + num2;
+            cout << "Результат: " << num1 + num2 << endl;
             break;
         case '-':
-            result = num1 - num2;
+            cout << "Результат: " << num1 - num2 << endl;
             break;
         case '*':
-            result = num1 * num2;
+            cout << "Результат: " << num1 * num2 << endl;
             break;
         case '/':
-            if (num2 == 0) {
-                cout << "Ошибка: деление на ноль!" << endl;
-                error = true;
-            } else {
-                result = num1 / num2;
+            switch (num2 == 0) {
+                case true:
+                    cout << "Ошибка: деление на ноль!" << endl;
+                    break;
+                case false:
+                    cout << "Результат: " << num1 / num2 << endl;
+                    break;
             }
             break;
         case '%':
-            if (num2 == 0) {
-                cout << "Ошибка: деление на ноль!" << endl;
-                error = true;
-            } else {
-                result = (int)num1 % (int)num2;
+            switch (num2 == 0) {
+                case true:
+                    cout << "Ошибка: деление на ноль!" << endl;
+                    break;
+                case false:
+                    cout << "Результат: " << (int)num1 % (int)num2 << endl;
+                    break;
             }
             break;
         default:
             cout << "Ошибка: неверный оператор!" << endl;
-            error = true;
-    }
-    
-    if (!error) {
-        cout << "Результат: " << result << endl;
+            break;
     }
     
     return 0;
 }
-
-
 
 #include <iostream>
 using namespace std;
@@ -151,85 +156,53 @@ int main() {
     cout << "Введите год: ";
     cin >> year;
     
-    // Проверяем, является ли год високосным
     bool isLeap = false;
-    if (year % 4 == 0) {
-        if (year % 100 == 0) {
-            if (year % 400 == 0) {
-                isLeap = true;
+    
+    // Проверяем условия високосного года через switch
+    switch (year % 4 == 0) {
+        case true:
+            switch (year % 100 == 0) {
+                case true:
+                    switch (year % 400 == 0) {
+                        case true:
+                            isLeap = true;
+                            break;
+                        case false:
+                            isLeap = false;
+                            break;
+                    }
+                    break;
+                case false:
+                    isLeap = true;
+                    break;
             }
-        } else {
-            isLeap = true;
-        }
+            break;
+        case false:
+            isLeap = false;
+            break;
     }
     
-    if (isLeap) {
-        cout << year << " год является високосным" << endl;
-        cout << "Следующий високосный год: " << year + 4 << endl;
-    } else {
-        // Находим следующий високосный год
-        int nextLeap = year + 1;
-        while (true) {
-            if (nextLeap % 4 == 0) {
-                if (nextLeap % 100 == 0) {
-                    if (nextLeap % 400 == 0) {
-                        break;
-                    }
-                } else {
+    switch (isLeap) {
+        case true:
+            cout << year << " год является високосным" << endl;
+            cout << "Следующий високосный год: " << year + 4 << endl;
+            break;
+        case false:
+            // Находим следующий високосный год
+            int nextLeap = year + 1;
+            while (true) {
+                if ((nextLeap % 4 == 0 && nextLeap % 100 != 0) || (nextLeap % 400 == 0)) {
                     break;
                 }
+                nextLeap++;
             }
-            nextLeap++;
-        }
-        cout << year << " год не является високосным" << endl;
-
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-using namespace std;
-
-int main() {
-    srand(time(0)); // Инициализация генератора случайных чисел
-    
-    int userChoice;
-    
-    cout << "=== Камень, Ножницы, Бумага ===" << endl;
-    cout << "Выберите:" << endl;
-    cout << "0 - Камень" << endl;
-    cout << "1 - Ножницы" << endl;
-    cout << "2 - Бумага" << endl;
-    cout << "Ваш выбор: ";
-    cin >> userChoice;
-    
-    if (userChoice < 0 || userChoice > 2) {
-        cout << "Ошибка: выберите число от 0 до 2" << endl;
-        return 1;
-    }
-    
-    int computerChoice = rand() % 3;
-    
-    string choices[3] = {"Камень", "Ножницы", "Бумага"};
-    
-    cout << "Вы выбрали: " << choices[userChoice] << endl;
-    cout << "Компьютер выбрал: " << choices[computerChoice] << endl;
-    
-    // Определяем победителя
-    if (userChoice == computerChoice) {
-        cout << "Ничья!" << endl;
-    } else if ((userChoice == 0 && computerChoice == 1) || 
-               (userChoice == 1 && computerChoice == 2) || 
-               (userChoice == 2 && computerChoice == 0)) {
-        cout << "Вы победили!" << endl;
-    } else {
-        cout << "Компьютер победил!" << endl;
+            cout << year << " год не является високосным" << endl;
+            cout << "Следующий високосный год: " << nextLeap << endl;
+            break;
     }
     
     return 0;
 }
-
-
-
-
 #include <iostream>
 using namespace std;
 
@@ -242,23 +215,96 @@ int main() {
     cout << "Введите текущий час (0-23): ";
     cin >> time;
     
-    if (time < 0 || time > 23) {
-        cout << "Ошибка: время должно быть от 0 до 23" << endl;
-        return 1;
+    // Проверка корректности времени
+    switch (time >= 0 && time <= 23) {
+        case false:
+            cout << "Ошибка: время должно быть от 0 до 23" << endl;
+            return 1;
+        case true:
+            break;
     }
     
-    if (isDoorOpen) {
-        if (time > 22 || time < 6) {
-            cout << "Alarm ON" << endl;
-        } else {
-            cout << "Добро пожаловать!" << endl;
-        }
-    } else {
-        cout << "Дверь закрыта, сигнализация выключена" << endl;
+    switch (isDoorOpen) {
+        case true:
+            switch (time > 22 || time < 6) {
+                case true:
+                    cout << "Alarm ON" << endl;
+                    break;
+                case false:
+                    cout << "Добро пожаловать!" << endl;
+                    break;
+            }
+            break;
+        case false:
+            cout << "Дверь закрыта, сигнализация выключена" << endl;
+            break;
     }
     
     return 0;
 }
+
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(time(0));
+    
+    int userChoice;
+    string choices[3] = {"Камень", "Ножницы", "Бумага"};
+    
+    cout << "=== Камень, Ножницы, Бумага ===" << endl;
+    cout << "Выберите:" << endl;
+    cout << "0 - Камень" << endl;
+    cout << "1 - Ножницы" << endl;
+    cout << "2 - Бумага" << endl;
+    cout << "Ваш выбор: ";
+    cin >> userChoice;
+    
+    // Проверка ввода
+    switch (userChoice) {
+        case 0: case 1: case 2:
+            break;
+        default:
+            cout << "Ошибка: выберите число от 0 до 2" << endl;
+            return 1;
+    }
+    
+    int computerChoice = rand() % 3;
+    
+    cout << "Вы выбрали: " << choices[userChoice] << endl;
+    cout << "Компьютер выбрал: " << choices[computerChoice] << endl;
+    
+    // Определяем победителя
+    switch (userChoice) {
+        case 0: // Камень
+            switch (computerChoice) {
+                case 0: cout << "Ничья!" << endl; break;
+                case 1: cout << "Вы победили!" << endl; break;
+                case 2: cout << "Компьютер победил!" << endl; break;
+            }
+            break;
+        case 1: // Ножницы
+            switch (computerChoice) {
+                case 0: cout << "Компьютер победил!" << endl; break;
+                case 1: cout << "Ничья!" << endl; break;
+                case 2: cout << "Вы победили!" << endl; break;
+            }
+            break;
+        case 2: // Бумага
+            switch (computerChoice) {
+                case 0: cout << "Вы победили!" << endl; break;
+                case 1: cout << "Компьютер победил!" << endl; break;
+                case 2: cout << "Ничья!" << endl; break;
+            }
+            break;
+    }
+    
+    return 0;
+}
+
 
 
 
