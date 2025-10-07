@@ -1,194 +1,156 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-void task_1(){
-      double num1, num2;
-        
-    cout << "Enter second number : ";
+// Task 1: Division of two numbers
+void task_1() {
+    cout << "=== Task 1: Division of Two Numbers ===" << endl;
+    double num1, num2;
+    
+    cout << "Enter the first number: ";
     cin >> num1;
-    cout << "Enter first number:  ";
+    cout << "Enter the second number: ";
     cin >> num2;
+    
     switch (num2 == 0) {
-    case true:
-         cout << "Error" << endl;
+        case true:
+            cout << "Error: Division by zero!" << endl;
             break;
-    case false:
-        cout << "result:  " << num1 / num2 << endl;
+        case false:
+            cout << "Division result: " << num1 / num2 << endl;
             break;
     }
+    cout << endl;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int main(){
-     task_1();
-     task_2();
-     task_3();
-     task_4();
-     task_5();
-     task_6();
-     task_7();
-     task_8();
-     task_9();
-     task_10(); 
- 
-}
-#include <iostream>
-using namespace std;
-
-int main() {
+// Task 2: Check if number is three-digit and even
+void task_2() {
+    cout << "=== Task 2: Three-digit Even Number Check ===" << endl;
     int number;
     
-    cout << "Введите число: ";
+    cout << "Enter a number: ";
     cin >> number;
     
-    // Проверка на трехзначность
     switch (number >= 100 && number <= 999) {
         case true:
-            // Проверка на четность
             switch (number % 2 == 0) {
                 case true:
-                    cout << "Число " << number << " является трехзначным и четным" << endl;
+                    cout << "Number " << number << " is three-digit and even" << endl;
                     break;
                 case false:
-                    cout << "Число " << number << " является трехзначным, но нечетным" << endl;
+                    cout << "Number " << number << " is three-digit but odd" << endl;
                     break;
             }
             break;
         case false:
-            cout << "Число " << number << " не является трехзначным" << endl;
+            cout << "Number " << number << " is not three-digit" << endl;
             break;
     }
-    
-    return 0;
+    cout << endl;
 }
 
-#include <iostream>
-using namespace std;
-
-int main() {
+// Task 3: Season and days in month
+void task_3() {
+    cout << "=== Task 3: Season and Days in Month ===" << endl;
     int month;
     
-    cout << "Введите номер месяца (1-12): ";
+    cout << "Enter month number (1-12): ";
     cin >> month;
     
     switch (month) {
         case 1: case 2: case 12:
-            cout << "Время года: Зима" << endl;
+            cout << "Season: Winter" << endl;
             break;
         case 3: case 4: case 5:
-            cout << "Время года: Весна" << endl;
+            cout << "Season: Spring" << endl;
             break;
         case 6: case 7: case 8:
-            cout << "Время года: Лето" << endl;
+            cout << "Season: Summer" << endl;
             break;
         case 9: case 10: case 11:
-            cout << "Время года: Осень" << endl;
+            cout << "Season: Autumn" << endl;
             break;
         default:
-            cout << "Ошибка: введите число от 1 до 12" << endl;
-            return 1;
+            cout << "Error: Please enter a number from 1 to 12" << endl;
+            cout << endl;
+            return;
     }
     
-    // Определяем количество дней
     switch (month) {
         case 2:
-            cout << "Количество дней: 28" << endl;
+            cout << "Days: 28" << endl;
             break;
         case 4: case 6: case 9: case 11:
-            cout << "Количество дней: 30" << endl;
+            cout << "Days: 30" << endl;
             break;
         case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-            cout << "Количество дней: 31" << endl;
+            cout << "Days: 31" << endl;
             break;
     }
-    
-    return 0;
+    cout << endl;
 }
 
-
-#include <iostream>
-using namespace std;
-
-int main() {
+// Task 4: Calculator
+void task_4() {
+    cout << "=== Task 4: Calculator ===" << endl;
     double num1, num2;
     char operation;
     
-    cout << "Введите первое число: ";
+    cout << "Enter the first number: ";
     cin >> num1;
-    cout << "Введите оператор (+, -, *, /, %): ";
+    cout << "Enter operator (+, -, *, /, %): ";
     cin >> operation;
-    cout << "Введите второе число: ";
+    cout << "Enter the second number: ";
     cin >> num2;
     
     switch (operation) {
         case '+':
-            cout << "Результат: " << num1 + num2 << endl;
+            cout << "Result: " << num1 + num2 << endl;
             break;
         case '-':
-            cout << "Результат: " << num1 - num2 << endl;
+            cout << "Result: " << num1 - num2 << endl;
             break;
         case '*':
-            cout << "Результат: " << num1 * num2 << endl;
+            cout << "Result: " << num1 * num2 << endl;
             break;
         case '/':
             switch (num2 == 0) {
                 case true:
-                    cout << "Ошибка: деление на ноль!" << endl;
+                    cout << "Error: Division by zero!" << endl;
                     break;
                 case false:
-                    cout << "Результат: " << num1 / num2 << endl;
+                    cout << "Result: " << num1 / num2 << endl;
                     break;
             }
             break;
         case '%':
             switch (num2 == 0) {
                 case true:
-                    cout << "Ошибка: деление на ноль!" << endl;
+                    cout << "Error: Division by zero!" << endl;
                     break;
                 case false:
-                    cout << "Результат: " << (int)num1 % (int)num2 << endl;
+                    cout << "Result: " << (int)num1 % (int)num2 << endl;
                     break;
             }
             break;
         default:
-            cout << "Ошибка: неверный оператор!" << endl;
+            cout << "Error: Invalid operator!" << endl;
             break;
     }
-    
-    return 0;
+    cout << endl;
 }
 
-#include <iostream>
-using namespace std;
-
-int main() {
+// Task 5: Leap year
+void task_5() {
+    cout << "=== Task 5: Leap Year ===" << endl;
     int year;
     
-    cout << "Введите год: ";
+    cout << "Enter a year: ";
     cin >> year;
     
     bool isLeap = false;
     
-    // Проверяем условия високосного года через switch
     switch (year % 4 == 0) {
         case true:
             switch (year % 100 == 0) {
@@ -214,11 +176,10 @@ int main() {
     
     switch (isLeap) {
         case true:
-            cout << year << " год является високосным" << endl;
-            cout << "Следующий високосный год: " << year + 4 << endl;
+            cout << year << " is a leap year" << endl;
+            cout << "Next leap year: " << year + 4 << endl;
             break;
         case false:
-            // Находим следующий високосный год
             int nextLeap = year + 1;
             while (true) {
                 if ((nextLeap % 4 == 0 && nextLeap % 100 != 0) || (nextLeap % 400 == 0)) {
@@ -226,30 +187,29 @@ int main() {
                 }
                 nextLeap++;
             }
-            cout << year << " год не является високосным" << endl;
-            cout << "Следующий високосный год: " << nextLeap << endl;
+            cout << year << " is not a leap year" << endl;
+            cout << "Next leap year: " << nextLeap << endl;
             break;
     }
-    
-    return 0;
+    cout << endl;
 }
-#include <iostream>
-using namespace std;
 
-int main() {
+// Task 6: Smart home
+void task_6() {
+    cout << "=== Task 6: Smart Home ===" << endl;
     bool isDoorOpen;
     int time;
     
-    cout << "Дверь открыта? (1 - да, 0 - нет): ";
+    cout << "Is door open? (1 - yes, 0 - no): ";
     cin >> isDoorOpen;
-    cout << "Введите текущий час (0-23): ";
+    cout << "Enter current hour (0-23): ";
     cin >> time;
     
-    // Проверка корректности времени
     switch (time >= 0 && time <= 23) {
         case false:
-            cout << "Ошибка: время должно быть от 0 до 23" << endl;
-            return 1;
+            cout << "Error: Time must be between 0 and 23" << endl;
+            cout << endl;
+            return;
         case true:
             break;
     }
@@ -261,84 +221,102 @@ int main() {
                     cout << "Alarm ON" << endl;
                     break;
                 case false:
-                    cout << "Добро пожаловать!" << endl;
+                    cout << "Welcome!" << endl;
                     break;
             }
             break;
         case false:
-            cout << "Дверь закрыта, сигнализация выключена" << endl;
+            cout << "Door closed, alarm off" << endl;
             break;
     }
-    
-    return 0;
+    cout << endl;
 }
 
-
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-using namespace std;
-
-int main() {
+// Task 7: Rock, Paper, Scissors
+void task_7() {
+    cout << "=== Task 7: Rock, Paper, Scissors ===" << endl;
     srand(time(0));
     
     int userChoice;
-    string choices[3] = {"Камень", "Ножницы", "Бумага"};
+    string choices[3] = {"Rock", "Scissors", "Paper"};
     
-    cout << "=== Камень, Ножницы, Бумага ===" << endl;
-    cout << "Выберите:" << endl;
-    cout << "0 - Камень" << endl;
-    cout << "1 - Ножницы" << endl;
-    cout << "2 - Бумага" << endl;
-    cout << "Ваш выбор: ";
+    cout << "Choose:" << endl;
+    cout << "0 - Rock" << endl;
+    cout << "1 - Scissors" << endl;
+    cout << "2 - Paper" << endl;
+    cout << "Your choice: ";
     cin >> userChoice;
     
-    // Проверка ввода
     switch (userChoice) {
         case 0: case 1: case 2:
             break;
         default:
-            cout << "Ошибка: выберите число от 0 до 2" << endl;
-            return 1;
+            cout << "Error: Please choose a number from 0 to 2" << endl;
+            cout << endl;
+            return;
     }
     
     int computerChoice = rand() % 3;
     
-    cout << "Вы выбрали: " << choices[userChoice] << endl;
-    cout << "Компьютер выбрал: " << choices[computerChoice] << endl;
+    cout << "You chose: " << choices[userChoice] << endl;
+    cout << "Computer chose: " << choices[computerChoice] << endl;
     
-    // Определяем победителя
     switch (userChoice) {
-        case 0: // Камень
+        case 0:
             switch (computerChoice) {
-                case 0: cout << "Ничья!" << endl; break;
-                case 1: cout << "Вы победили!" << endl; break;
-                case 2: cout << "Компьютер победил!" << endl; break;
+                case 0: cout << "Draw!" << endl; break;
+                case 1: cout << "You win!" << endl; break;
+                case 2: cout << "Computer wins!" << endl; break;
             }
             break;
-        case 1: // Ножницы
+        case 1:
             switch (computerChoice) {
-                case 0: cout << "Компьютер победил!" << endl; break;
-                case 1: cout << "Ничья!" << endl; break;
-                case 2: cout << "Вы победили!" << endl; break;
+                case 0: cout << "Computer wins!" << endl; break;
+                case 1: cout << "Draw!" << endl; break;
+                case 2: cout << "You win!" << endl; break;
             }
             break;
-        case 2: // Бумага
+        case 2:
             switch (computerChoice) {
-                case 0: cout << "Вы победили!" << endl; break;
-                case 1: cout << "Компьютер победил!" << endl; break;
-                case 2: cout << "Ничья!" << endl; break;
+                case 0: cout << "You win!" << endl; break;
+                case 1: cout << "Computer wins!" << endl; break;
+                case 2: cout << "Draw!" << endl; break;
             }
             break;
     }
+    cout << endl;
+}
+
+// Main menu
+int main() {
+    int choice;
+    
+    do {
+        cout << "=== MAIN MENU ===" << endl;
+        cout << "1. Division of two numbers" << endl;
+        cout << "2. Three-digit even number check" << endl;
+        cout << "3. Season and days in month" << endl;
+        cout << "4. Calculator" << endl;
+        cout << "5. Leap year" << endl;
+        cout << "6. Smart home" << endl;
+        cout << "7. Rock, Paper, Scissors" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Choose a task: ";
+        cin >> choice;
+        
+        switch (choice) {
+            case 1: task_1(); break;
+            case 2: task_2(); break;
+            case 3: task_3(); break;
+            case 4: task_4(); break;
+            case 5: task_5(); break;
+            case 6: task_6(); break;
+            case 7: task_7(); break;
+            case 0: cout << "Exiting program..." << endl; break;
+            default: cout << "Invalid choice! Please try again." << endl << endl; break;
+        }
+    } while (choice != 0);
     
     return 0;
 }
-
-
-
-
-
-
-
 
