@@ -40,7 +40,7 @@ void task_1(){
 
 int main(){
      task_1();
-    */* task_2();
+     task_2();
      task_3();
      task_4();
      task_5();
@@ -48,7 +48,7 @@ int main(){
      task_7();
      task_8();
      task_9();
-     task_10(); */
+     task_10(); 
  
 }
 #include <iostream>
