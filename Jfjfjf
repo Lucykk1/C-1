@@ -81,3 +81,147 @@ int main() {
     
     return 0;
 }
+
+
+
+#include <iostream>
+#include <string>
+
+// Enum для разрядов чисел
+enum DigitPosition {
+    HUNDREDS,
+    TENS,
+    UNITS
+};
+
+// Enum для особых случаев (10-19)
+enum SpecialTeens {
+    TEN = 10,
+    ELEVEN,
+    TWELVE,
+    THIRTEEN,
+    FOURTEEN,
+    FIFTEEN,
+    SIXTEEN,
+    SEVENTEEN,
+    EIGHTEEN,
+    NINETEEN
+};
+
+class NumberToWords {
+private:
+    static std::wstring getHundreds(int digit) {
+        switch (digit) {
+            case 1: return L"сто";
+            case 2: return L"двести";
+            case 3: return L"триста";
+            case 4: return L"четыреста";
+            case 5: return L"пятьсот";
+            case 6: return L"шестьсот";
+            case 7: return L"семьсот";
+            case 8: return L"восемьсот";
+            case 9: return L"девятьсот";
+            default: return L"";
+        }
+    }
+
+    static std::wstring getTens(int digit) {
+        switch (digit) {
+            case 2: return L"двадцать";
+            case 3: return L"тридцать";
+            case 4: return L"сорок";
+            case 5: return L"пятьдесят";
+            case 6: return L"шестьдесят";
+            case 7: return L"семьдесят";
+            case 8: return L"восемьдесят";
+            case 9: return L"девяносто";
+            default: return L"";
+        }
+    }
+
+    static std::wstring getUnits(int digit) {
+        switch (digit) {
+            case 1: return L"один";
+            case 2: return L"два";
+            case 3: return L"три";
+            case 4: return L"четыре";
+            case 5: return L"пять";
+            case 6: return L"шесть";
+            case 7: return L"семь";
+            case 8: return L"восемь";
+            case 9: return L"девять";
+            default: return L"";
+        }
+    }
+
+    static std::wstring getTeens(int number) {
+        switch (number) {
+            case TEN: return L"десять";
+            case ELEVEN: return L"одиннадцать";
+            case TWELVE: return L"двенадцать";
+            case THIRTEEN: return L"тринадцать";
+            case FOURTEEN: return L"четырнадцать";
+            case FIFTEEN: return L"пятнадцать";
+            case SIXTEEN: return L"шестнадцать";
+            case SEVENTEEN: return L"семнадцать";
+            case EIGHTEEN: return L"восемнадцать";
+            case NINETEEN: return L"девятнадцать";
+            default: return L"";
+        }
+    }
+
+public:
+    static std::wstring convert(int number) {
+        if (number < 100 || number > 999) {
+            return L"Число должно быть в диапазоне 100-999";
+        }
+
+        int hundreds = number / 100;
+        int tens = (number / 10) % 10;
+        int units = number % 10;
+
+        std::wstring result;
+
+        // Обрабатываем сотни
+        result += getHundreds(hundreds);
+
+        // Обрабатываем десятки и единицы
+        if (tens == 1) {
+            // Особый случай: числа 10-19
+            if (!result.empty()) result += L" ";
+            result += getTeens(10 + units);
+        } else {
+            // Обычный случай: десятки + единицы
+            if (tens > 0) {
+                if (!result.empty()) result += L" ";
+                result += getTens(tens);
+            }
+            if (units > 0) {
+                if (!result.empty()) result += L" ";
+                result += getUnits(units);
+            }
+        }
+
+        return result;
+    }
+};
+
+int main() {
+    // Устанавливаем локаль для поддержки русского языка
+    std::locale::global(std::locale(""));
+    
+    int number;
+    
+    std::wcout << L"Введите целое число в диапазоне 100-999: ";
+    std::wcin >> number;
+    
+    if (std::wcin.fail() || number < 100 || number > 999) {
+        std::wcout << L"Ошибка: введите корректное число от 100 до 999!" << std::endl;
+        return 1;
+    }
+    
+    std::wstring description = NumberToWords::convert(number);
+    std::wcout << number << L" - \"" << description << L"\"" << std::endl;
+    
+    return 0;
+} 
