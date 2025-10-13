@@ -1,0 +1,69 @@
+#include <iostream>
+#include <locale>
+
+// Перечисление для единиц измерения
+enum LengthUnit {
+    MILLIMETER = 0,
+    CENTIMETER = 1,
+    DECIMETER = 2,
+    METER = 3,
+    KILOMETER = 4
+};
+
+int main() {
+    // Установка локали для поддержки русского языка
+    std::locale::global(std::locale(""));
+    
+    int unitNumber;
+    double length, lengthInMeters;
+    
+    // Вывод информации о единицах измерения
+    std::wcout << L"Единицы длины:" << std::endl;
+    std::wcout << L"0 - миллиметр" << std::endl;
+    std::wcout << L"1 - сантиметр" << std::endl;
+    std::wcout << L"2 - дециметр" << std::endl;
+    std::wcout << L"3 - метр" << std::endl;
+    std::wcout << L"4 - километр" << std::endl;
+    
+    // Ввод данных от пользователя
+    std::wcout << L"\nВведите номер единицы измерения: ";
+    std::wcin >> unitNumber;
+    
+    std::wcout << L"Введите длину отрезка: ";
+    std::wcin >> length;
+    
+    // Преобразование номера в тип перечисления
+    LengthUnit selectedUnit = static_cast<LengthUnit>(unitNumber);
+    
+    // Вычисление длины в метрах с помощью switch
+    switch(selectedUnit) {
+        case MILLIMETER:
+            lengthInMeters = length / 1000.0;
+            std::wcout << L"Вы выбрали миллиметры. ";
+            break;
+        case CENTIMETER:
+            lengthInMeters = length / 100.0;
+            std::wcout << L"Вы выбрали сантиметры. ";
+            break;
+        case DECIMETER:
+            lengthInMeters = length / 10.0;
+            std::wcout << L"Вы выбрали дециметры. ";
+            break;
+        case METER:
+            lengthInMeters = length;
+            std::wcout << L"Вы выбрали метры. ";
+            break;
+        case KILOMETER:
+            lengthInMeters = length * 1000.0;
+            std::wcout << L"Вы выбрали километры. ";
+            break;
+        default:
+            std::wcout << L"Ошибка: неверный номер единицы измерения!" << std::endl;
+            return 1;
+    }
+    
+    // Вывод результата
+    std::wcout << L"Длина отрезка в метрах: " << lengthInMeters << std::endl;
+    
+    return 0;
+}
