@@ -1,0 +1,100 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+enum Suit {
+    SPADES = 0,
+    CLUBS = 1,
+    DIAMONDS = 2,
+    HEARTS = 3
+};
+
+int main() {
+    std::locale::global(std::locale(""));
+    
+    int suit, rank;
+    
+    std::wcout << L"Введите масть карты (0-пики, 1-трефы, 2-бубны, 3-черви): ";
+    std::wcin >> suit;
+    
+    std::wcout << L"Введите достоинство карты (6-10, 11-валет, 12-дама, 13-король, 14-туз): ";
+    std::wcin >> rank;
+    
+    // Массивы с названиями достоинств и мастей
+    std::vector<std::wstring> rankNames = {
+        L"", L"", L"", L"", L"", L"", // 0-5 не используются
+        L"шестерка", L"семерка", L"восьмерка", L"девятка", L"десятка",
+        L"валет", L"дама", L"король", L"туз"
+    };
+    
+    std::vector<std::wstring> suitNames = {
+        L"пик", L"треф", L"бубен", L"червей"
+    };
+    
+    // Проверяем корректность ввода
+    if (rank >= 6 && rank <= 14 && suit >= 0 && suit <= 3) {
+        std::wcout << L"\nРезультат: " << rankNames[rank] << L" " << suitNames[suit] << std::endl;
+    } else {
+        std::wcout << L"Ошибка: введены некорректные данные!" << std::endl;
+    }
+    
+    return 0;
+}
+
+#include <iostream>
+#include <string>
+
+// Перечисление для мастей карт
+enum Suit {
+    SPADES = 0,    // пики
+    CLUBS = 1,     // трефы
+    DIAMONDS = 2,  // бубны
+    HEARTS = 3     // черви
+};
+
+int main() {
+    // Устанавливаем локаль для работы с широкими символами
+    std::locale::global(std::locale(""));
+    
+    int suit, rank;
+    
+    std::wcout << L"Введите масть карты (0-пики, 1-трефы, 2-бубны, 3-черви): ";
+    std::wcin >> suit;
+    
+    std::wcout << L"Введите достоинство карты (6-10, 11-валет, 12-дама, 13-король, 14-туз): ";
+    std::wcin >> rank;
+    
+    // Определяем название достоинства карты
+    std::wstring rankName;
+    switch (rank) {
+        case 6: rankName = L"шестерка"; break;
+        case 7: rankName = L"семерка"; break;
+        case 8: rankName = L"восьмерка"; break;
+        case 9: rankName = L"девятка"; break;
+        case 10: rankName = L"десятка"; break;
+        case 11: rankName = L"валет"; break;
+        case 12: rankName = L"дама"; break;
+        case 13: rankName = L"король"; break;
+        case 14: rankName = L"туз"; break;
+        default: rankName = L"неизвестная карта"; break;
+    }
+    
+    // Определяем название масти
+    std::wstring suitName;
+    switch (suit) {
+        case SPADES: suitName = L"пик"; break;
+        case CLUBS: suitName = L"треф"; break;
+        case DIAMONDS: suitName = L"бубен"; break;
+        case HEARTS: suitName = L"червей"; break;
+        default: suitName = L"неизвестной масти"; break;
+    }
+    
+    // Выводим результат
+    std::wcout << L"\nРезультат: " << rankName << L" " << suitName << std::endl;
+    
+    return 0;
+}
+
+
+
+
