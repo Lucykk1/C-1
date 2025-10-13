@@ -1,0 +1,83 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+// Enum для категорий чисел
+enum NumberCategory {
+    HUNDREDS_PART,
+    TENS_PART, 
+    UNITS_PART,
+    TEENS_PART
+};
+
+class CompactNumberConverter {
+private:
+    static const std::vector<std::wstring> units;
+    static const std::vector<std::wstring> teens;
+    static const std::vector<std::wstring> tens;
+    static const std::vector<std::wstring> hundreds;
+
+public:
+    static std::wstring convert(int number) {
+        if (number < 100 || number > 999) {
+            return L"Число должно быть в диапазоне 100-999";
+        }
+
+        int h = number / 100;
+        int t = (number / 10) % 10;
+        int u = number % 10;
+
+        std::wstring result = hundreds[h];
+        
+        if (t == 1) {
+            result += L" " + teens[u];
+        } else {
+            if (t > 0) {
+                result += L" " + tens[t];
+            }
+            if (u > 0) {
+                result += L" " + units[u];
+            }
+        }
+        
+        return result;
+    }
+};
+
+// Инициализация статических массивов
+const std::vector<std::wstring> CompactNumberConverter::units = {
+    L"", L"один", L"два", L"три", L"четыре", 
+    L"пять", L"шесть", L"семь", L"восемь", L"девять"
+};
+
+const std::vector<std::wstring> CompactNumberConverter::teens = {
+    L"десять", L"одиннадцать", L"двенадцать", L"тринадцать", L"четырнадцать",
+    L"пятнадцать", L"шестнадцать", L"семнадцать", L"восемнадцать", L"девятнадцать"
+};
+
+const std::vector<std::wstring> CompactNumberConverter::tens = {
+    L"", L"", L"двадцать", L"тридцать", L"сорок", L"пятьдесят",
+    L"шестьдесят", L"семьдесят", L"восемьдесят", L"девяносто"
+};
+
+const std::vector<std::wstring> CompactNumberConverter::hundreds = {
+    L"", L"сто", L"двести", L"триста", L"четыреста", L"пятьсот",
+    L"шестьсот", L"семьсот", L"восемьсот", L"девятьсот"
+};
+
+int main() {
+    std::locale::global(std::locale(""));
+    
+    int number;
+    std::wcout << L"Введите число (100-999): ";
+    std::wcin >> number;
+    
+    if (std::wcin.fail() || number < 100 || number > 999) {
+        std::wcout << L"Ошибка ввода!" << std::endl;
+        return 1;
+    }
+    
+    std::wcout << number << L" - \"" << CompactNumberConverter::convert(number) << L"\"" << std::endl;
+    
+    return 0;
+}
