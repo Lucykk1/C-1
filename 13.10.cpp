@@ -130,3 +130,61 @@ int main()
 
     return 0;
 }
+#include <iostream>
+#include <cmath>
+
+int main() {
+    // Установка локали для корректного отображения кириллицы
+    std::locale::global(std::locale(""));
+    
+    double a, b;
+    
+    // Вывод информации о программе
+    std::wcout << L"Программа для решения квадратного уравнения вида: ax² + bx + c = 0" << std::endl;
+    std::wcout << L"где:" << std::endl;
+    std::wcout << L"a - коэффициент при x²" << std::endl;
+    std::wcout << L"b - коэффициент при x" << std::endl;
+    std::wcout << L"c - свободный член (в вашем случае c = 5)" << std::endl;
+    std::wcout << std::endl;
+    
+    // Ввод коэффициентов
+    std::wcout << L"Введите коэффициент a: ";
+    std::wcin >> a;
+    
+    std::wcout << L"Введите коэффициент b: ";
+    std::wcin >> b;
+    
+    double c = 5;  // По условию задачи c = 5
+    
+    std::wcout << std::endl;
+    std::wcout << L"Ваше уравнение: " << a << L"x² + " << b << L"x + " << c << L" = 0" << std::endl;
+    std::wcout << std::endl;
+    
+    // Вычисление дискриминанта
+    double D = b * b - 4 * a * c;
+    std::wcout << L"Дискриминант D = " << b << L"² - 4*" << a << L"*" << c << L" = " << D << std::endl;
+    std::wcout << std::endl;
+    
+    // Проверка условий и нахождение корней
+    if (D > 0) {
+        // Два корня
+        double x1 = (-b + sqrt(D)) / (2 * a);
+        double x2 = (-b - sqrt(D)) / (2 * a);
+        
+        std::wcout << L"Уравнение имеет два корня:" << std::endl;
+        std::wcout << L"x₁ = (-" << b << L" + √" << D << L") / (2*" << a << L") = " << x1 << std::endl;
+        std::wcout << L"x₂ = (-" << b << L" - √" << D << L") / (2*" << a << L") = " << x2 << std::endl;
+    }
+    else if (D == 0) {
+        // Один корень (в условии указано 20, но это ошибка - должно быть -b/(2a))
+        double x = -b / (2 * a);
+        std::wcout << L"Уравнение имеет один корень:" << std::endl;
+        std::wcout << L"x = -" << b << L" / (2*" << a << L") = " << x << std::endl;
+    }
+    else {
+        // Нет корней
+        std::wcout << L"Уравнение не имеет действительных корней (D < 0)" << std::endl;
+    }
+    
+    return 0;
+}
