@@ -60,3 +60,57 @@
 
         return 0;
     }
+
+
+
+    double a, b,c;
+
+        std::wcout << L"Программа для решения квадратного уравнения вида: ax² + bx + c = 0" << std::endl;
+        // std::wcout << L"a " << std::endl;
+        // std::wcout << L"b " << std::endl;
+        // std::wcout << L"c " << std::endl;
+        std::wcout << std::endl;
+
+
+        std::wcout << L"Введите коэффициент a: ";
+        std::wcin >> a;
+
+        std::wcout << L"Введите коэффициент b: ";
+        std::wcin >> b;
+        std::wcout << L"Введите коэффициент c: ";
+        std::wcin >> c;
+
+
+
+        std::wcout << L"Ваше уравнение: " << a << L"x² + " << b << L"x + " << c << L" = 0" << std::endl;
+        std::wcout << std::endl;
+
+
+        double D = b * b - 4 * a * c;
+        std::wcout << L"Дискриминант D = " << b << L"² - 4*" << a << L"*" << c << L" = " << D << std::endl;
+        std::wcout << std::endl;
+
+
+        if (D > 0) {
+
+            double x1 = (-b + sqrt(D)) / (2 * a);
+            double x2 = (-b - sqrt(D)) / (2 * a);
+
+            std::wcout << L"Уравнение имеет два корня:" << std::endl;
+            std::wcout << L"x1 = (-" << b << L" + sqrt" << D << L") / (2*" << a << L") = " << x1 << std::endl;
+            std::wcout << L"x2 = (-" << b << L" - sqrt " << D << L") / (2*" << a << L") = " << x2 << std::endl;
+        }
+        else if (D == 0) {
+
+            double x = -b / (2 * a);
+            std::wcout << L"Уравнение имеет один корень:" << std::endl;
+            std::wcout << L"x = -" << b << L" / (2*" << a << L") = " << x << std::endl;
+        }
+        else {
+
+            std::wcout << L"Уравнение не имеет действительных корней (D < 0)" << std::endl;
+        }
+
+        return 0;
+}
+
