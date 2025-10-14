@@ -1,0 +1,68 @@
+#include <iostream>
+#include <locale>
+#include <string>
+
+using namespace std;
+
+int main() {
+    // Устанавливаем локаль для поддержки русского языка
+    locale::global(locale(""));
+    
+    wchar_t symbol;
+    
+    wcout << L"Введите символ: ";
+    wcin >> symbol;
+    
+    // Проверка на русские буквы
+    if ((symbol >= L'А' && symbol <= L'Я') || (symbol >= L'а' && symbol <= L'я')) {
+        wstring vowel = L"аеёиоуыэюяАЕЁИОУЫЭЮЯ";
+        
+        // Проверка на гласные
+        if (vowel.find(symbol) != wstring::npos) {
+            if (symbol >= L'А' && symbol <= L'Я') {
+                wcout << L"это буква русская заглавная гласная" << endl;
+            } else {
+                wcout << L"это буква русская строчная гласная" << endl;
+            }
+        } 
+        // Согласные
+        else {
+            if (symbol >= L'А' && symbol <= L'Я') {
+                wcout << L"это буква русская заглавная согласная" << endl;
+            } else {
+                wcout << L"это буква русская строчная согласная" << endl;
+            }
+        }
+    }
+    // Проверка на латинские буквы
+    else if ((symbol >= L'A' && symbol <= L'Z') || (symbol >= L'a' && symbol <= L'z')) {
+        wstring vowel = L"aeiouyAEIOUY";
+        
+        // Проверка на гласные
+        if (vowel.find(symbol) != wstring::npos) {
+            if (symbol >= L'A' && symbol <= L'Z') {
+                wcout << L"это буква латинская заглавная гласная" << endl;
+            } else {
+                wcout << L"это буква латинская строчная гласная" << endl;
+            }
+        } 
+        // Согласные
+        else {
+            if (symbol >= L'A' && symbol <= L'Z') {
+                wcout << L"это буква латинская заглавная согласная" << endl;
+            } else {
+                wcout << L"это буква латинская строчная согласная" << endl;
+            }
+        }
+    }
+    // Проверка на цифры
+    else if (symbol >= L'0' && symbol <= L'9') {
+        wcout << L"это цифра" << endl;
+    }
+    // Все остальные символы
+    else {
+        wcout << L"это не буква и не цифра" << endl;
+    }
+    
+    return 0;
+}
