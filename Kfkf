@@ -1,224 +1,98 @@
 #include <iostream>
-#include <locale>
-#include <cmath>
-using namespace std;
+#include <iomanip>
 
-// Задание 1: Определение типа символа
+// ЗАДАНИЕ 1: Сумма целых чисел от а до 500
 void task1() {
-    wcout << L"=== ЗАДАНИЕ 1: Определение типа символа ===" << endl;
-    wcout << L"Введите один символ: ";
+    std::wcout << L"=== ЗАДАНИЕ 1 ===" << std::endl;
+    int a;
+    std::wcout << L"Введите значение a: ";
+    std::cin >> a;
     
-    wchar_t ch;
-    wcin >> ch;
-    wcin.ignore(1000, L'\n'); // Очистка буфера
+    int sum = 0;
+    for (int i = a; i <= 500; i++) {
+        sum += i;
+    }
     
-    if ((ch >= L'а' && ch <= L'я') || (ch >= L'А' && ch <= L'Я') || 
-        (ch >= L'a' && ch <= L'z') || (ch >= L'A' && ch <= L'Z')) {
-        wcout << L"Это буква" << endl;
-    }
-    else if (ch >= L'0' && ch <= L'9') {
-        wcout << L"Это цифра" << endl;
-    }
-    else if (ch == L'.' || ch == L',' || ch == L'!' || ch == L'?' || 
-             ch == L':' || ch == L';' || ch == L'-' || ch == L'"' || 
-             ch == L'(' || ch == L')') {
-        wcout << L"Это знак препинания" << endl;
-    }
-    else {
-        wcout << L"Это другой символ" << endl;
-    }
-    wcout << endl;
+    std::wcout << L"Сумма чисел от " << a << L" до 500: " << sum << std::endl;
+    std::wcout << std::endl;
 }
 
-// Задание 2: Расчет стоимости разговора
+// ЗАДАНИЕ 2: x в степени y
 void task2() {
-    wcout << L"=== ЗАДАНИЕ 2: Расчет стоимости разговора ===" << endl;
+    std::wcout << L"=== ЗАДАНИЕ 2 ===" << std::endl;
+    int x, y;
+    std::wcout << L"Введите x: ";
+    std::cin >> x;
+    std::wcout << L"Введите y: ";
+    std::cin >> y;
     
-    // Тарифы для операторов (руб/мин)
-    const double TARIFFS[3][3] = {
-        {2.5, 4.0, 5.5},  // МТС
-        {2.0, 3.5, 5.0},  // Билайн
-        {3.0, 4.5, 6.0}   // Мегафон
-    };
-    
-    const wchar_t* OPERATORS[] = {L"МТС", L"Билайн", L"Мегафон"};
-    
-    wcout << L"Доступные операторы:" << endl;
-    wcout << L"1 - МТС" << endl;
-    wcout << L"2 - Билайн" << endl;
-    wcout << L"3 - Мегафон" << endl;
-    
-    int from_op, to_op;
-    double duration;
-    
-    wcout << L"Введите длительность разговора (мин): ";
-    wcin >> duration;
-    
-    wcout << L"Выберите оператор отправителя (1-3): ";
-    wcin >> from_op;
-    
-    wcout << L"Выберите оператор получателя (1-3): ";
-    wcin >> to_op;
-    
-    if (from_op < 1 || from_op > 3 || to_op < 1 || to_op > 3) {
-        wcout << L"Ошибка: неверный номер оператора!" << endl;
-        return;
+    long long result = 1;
+    for (int i = 0; i < y; i++) {
+        result *= x;
     }
     
-    if (duration <= 0) {
-        wcout << L"Ошибка: неверная длительность разговора!" << endl;
-        return;
-    }
-    
-    double cost = TARIFFS[from_op-1][to_op-1] * duration;
-    
-    wcout << L"\nРезультат расчета:" << endl;
-    wcout << L"Оператор отправителя: " << OPERATORS[from_op-1] << endl;
-    wcout << L"Оператор получателя: " << OPERATORS[to_op-1] << endl;
-    wcout << L"Длительность: " << duration << L" мин" << endl;
-    wcout << L"Стоимость разговора: " << cost << L" руб." << endl;
-    wcout << endl;
+    std::wcout << x << L" в степени " << y << L" = " << result << std::endl;
+    std::wcout << std::endl;
 }
 
-// Задание 3: Зарплата программиста
+// ЗАДАНИЕ 3: Среднее арифметическое от 1 до 1000
 void task3() {
-    wcout << L"=== ЗАДАНИЕ 3: Зарплата программиста ===" << endl;
+    std::wcout << L"=== ЗАДАНИЕ 3 ===" << std::endl;
     
-    const double SALARY_PER_100_LINES = 50.0;
-    const double FINE_PER_LATENESS = 20.0;
-    
-    int choice;
-    wcout << L"Меню:" << endl;
-    wcout << L"1 - Расчет строк кода по доходу и опозданиям" << endl;
-    wcout << L"2 - Расчет допустимых опозданий по коду и зарплате" << endl;
-    wcout << L"3 - Расчет зарплаты по коду и опозданиям" << endl;
-    wcout << L"Выберите пункт меню (1-3): ";
-    wcin >> choice;
-    
-    switch (choice) {
-        case 1: {
-            double desired_income;
-            int lateness_count;
-            
-            wcout << L"Введите желаемый доход ($): ";
-            wcin >> desired_income;
-            wcout << L"Введите количество опозданий: ";
-            wcin >> lateness_count;
-            
-            // Штрафы начисляются за каждое третье опоздание
-            int fined_latenesses = lateness_count / 3;
-            double total_fine = fined_latenesses * FINE_PER_LATENESS;
-            
-            // Нужный доход с учетом штрафов
-            double needed_income = desired_income + total_fine;
-            
-            // Расчет строк кода
-            double lines_of_code = (needed_income / SALARY_PER_100_LINES) * 100;
-            
-            wcout << L"\nРезультат:" << endl;
-            wcout << L"Штраф за опоздания: " << total_fine << L"$" << endl;
-            wcout << L"Необходимо написать: " << ceil(lines_of_code) << L" строк кода" << endl;
-            break;
-        }
-        
-        case 2: {
-            int lines_of_code;
-            double desired_salary;
-            
-            wcout << L"Введите количество строк кода: ";
-            wcin >> lines_of_code;
-            wcout << L"Введите желаемую зарплату ($): ";
-            wcin >> desired_salary;
-            
-            // Зарплата без учета штрафов
-            double base_salary = (lines_of_code / 100.0) * SALARY_PER_100_LINES;
-            
-            if (base_salary < desired_salary) {
-                wcout << L"Невозможно достичь желаемой зарплаты с таким количеством кода!" << endl;
-            } else {
-                // Максимально допустимый штраф
-                double max_fine = base_salary - desired_salary;
-                // Максимальное количество опозданий с учетом штрафа за каждое третье
-                int max_latenesses = (max_fine / FINE_PER_LATENESS) * 3;
-                
-                wcout << L"\nРезультат:" << endl;
-                wcout << L"Зарплата без штрафов: " << base_salary << L"$" << endl;
-                wcout << L"Максимальное количество опозданий: " << max_latenesses << endl;
-            }
-            break;
-        }
-        
-        case 3: {
-            int lines_of_code;
-            int lateness_count;
-            
-            wcout << L"Введите количество строк кода: ";
-            wcin >> lines_of_code;
-            wcout << L"Введите количество опозданий: ";
-            wcin >> lateness_count;
-            
-            // Расчет базовой зарплаты
-            double base_salary = (lines_of_code / 100.0) * SALARY_PER_100_LINES;
-            
-            // Расчет штрафов
-            int fined_latenesses = lateness_count / 3;
-            double total_fine = fined_latenesses * FINE_PER_LATENESS;
-            
-            // Итоговая зарплата
-            double final_salary = base_salary - total_fine;
-            
-            wcout << L"\nРезультат:" << endl;
-            wcout << L"Базовая зарплата: " << base_salary << L"$" << endl;
-            wcout << L"Штраф за опоздания: " << total_fine << L"$" << endl;
-            wcout << L"Итоговая зарплата: " << final_salary << L"$" << endl;
-            
-            if (final_salary <= 0) {
-                wcout << L"Васе не заплатят! Итоговая зарплата отрицательная." << endl;
-            } else {
-                wcout << L"Васе заплатят " << final_salary << L"$" << endl;
-            }
-            break;
-        }
-        
-        default:
-            wcout << L"Ошибка: неверный пункт меню!" << endl;
+    int sum = 0;
+    for (int i = 1; i <= 1000; i++) {
+        sum += i;
     }
-    wcout << endl;
+    
+    double average = static_cast<double>(sum) / 1000;
+    std::wcout << L"Среднее арифметическое чисел от 1 до 1000: " 
+               << std::fixed << std::setprecision(2) << average << std::endl;
+    std::wcout << std::endl;
+}
+
+// ЗАДАНИЕ 4: Произведение всех целых чисел от а до 20
+void task4() {
+    std::wcout << L"=== ЗАДАНИЕ 4 ===" << std::endl;
+    int a;
+    
+    do {
+        std::wcout << L"Введите значение a (1 <= a <= 20): ";
+        std::cin >> a;
+    } while (a < 1 || a > 20);
+    
+    long long product = 1;
+    for (int i = a; i <= 20; i++) {
+        product *= i;
+    }
+    
+    std::wcout << L"Произведение чисел от " << a << L" до 20: " << product << std::endl;
+    std::wcout << std::endl;
+}
+
+// ЗАДАНИЕ 5: Таблица умножения на k
+void task5() {
+    std::wcout << L"=== ЗАДАНИЕ 5 ===" << std::endl;
+    int k;
+    std::wcout << L"Введите число k для таблицы умножения: ";
+    std::cin >> k;
+    
+    std::wcout << L"Таблица умножения на " << k << L":" << std::endl;
+    for (int i = 2; i <= 9; i++) {
+        std::wcout << k << L" x " << i << L" = " << (k * i) << std::endl;
+    }
+    std::wcout << std::endl;
 }
 
 int main() {
-    // Установка локали для поддержки русского языка
-    setlocale(LC_ALL, "ru_RU.UTF-8");
+    // Устанавливаем локаль для поддержки русского языка
+    std::locale::global(std::locale(""));
     
-    int task_choice;
-    
-    do {
-        wcout << L"Выберите задание для выполнения:" << endl;
-        wcout << L"1 - Определение типа символа" << endl;
-        wcout << L"2 - Расчет стоимости разговора" << endl;
-        wcout << L"3 - Зарплата программиста" << endl;
-        wcout << L"0 - Выход" << endl;
-        wcout << L"Ваш выбор: ";
-        wcin >> task_choice;
-        
-        switch (task_choice) {
-            case 1:
-                task1();
-                break;
-            case 2:
-                task2();
-                break;
-            case 3:
-                task3();
-                break;
-            case 0:
-                wcout << L"Выход из программы." << endl;
-                break;
-            default:
-                wcout << L"Неверный выбор! Попробуйте снова." << endl;
-        }
-        
-    } while (task_choice != 0);
+    // Выполняем все задания
+    task1();
+    task2();
+    task3();
+    task4();
+    task5();
     
     return 0;
-} 
+}
