@@ -1,0 +1,155 @@
+#include <iostream>
+#include <locale>
+#include <cmath>
+using namespace std;
+
+// Задание 1: Определение типа символа
+void task1() {
+    wcout << L"=== ЗАДАНИЕ 1: Определение типа символа ===" << endl;
+    wcout << L"Введите один символ: ";
+    
+    wchar_t ch;
+    wcin >> ch;
+    wcin.ignore(1000, L'\n'); // Очистка буфера
+    
+    if ((ch >= L'а' && ch <= L'я') || (ch >= L'А' && ch <= L'Я') || 
+        (ch >= L'a' && ch <= L'z') || (ch >= L'A' && ch <= L'Z')) {
+        wcout << L"Это буква" << endl;
+    }
+    else if (ch >= L'0' && ch <= L'9') {
+        wcout << L"Это цифра" << endl;
+    }
+    else if (ch == L'.' || ch == L',' || ch == L'!' || ch == L'?' || 
+             ch == L':' || ch == L';' || ch == L'-' || ch == L'"' || 
+             ch == L'(' || ch == L')') {
+        wcout << L"Это знак препинания" << endl;
+    }
+    else {
+        wcout << L"Это другой символ" << endl;
+    }
+    wcout << endl;
+}
+
+// Задание 2: Расчет стоимости разговора
+void task2() {
+    wcout << L"=== ЗАДАНИЕ 2: Расчет стоимости разговора ===" << endl;
+    
+    // Тарифы для операторов (руб/мин)
+    const double TARIFFS[3][3] = {
+        {2.5, 4.0, 5.5},  // МТС
+        {2.0, 3.5, 5.0},  // Билайн
+        {3.0, 4.5, 6.0}   // Мегафон
+    };
+    
+    const wchar_t* OPERATORS[] = {L"МТС", L"Билайн", L"Мегафон"};
+    
+    wcout << L"Доступные операторы:" << endl;
+    wcout << L"1 - МТС" << endl;
+    wcout << L"2 - Билайн" << endl;
+    wcout << L"3 - Мегафон" << endl;
+    
+    int from_op, to_op;
+    double duration;
+    
+    wcout << L"Введите длительность разговора (мин): ";
+    wcin >> duration;
+    
+    wcout << L"Выберите оператор отправителя (1-3): ";
+    wcin >> from_op;
+    
+    wcout << L"Выберите оператор получателя (1-3): ";
+    wcin >> to_op;
+    
+    if (from_op < 1 || from_op > 3 || to_op < 1 || to_op > 3) {
+        wcout << L"Ошибка: неверный номер оператора!" << endl;
+        return;
+    }
+    
+    if (duration <= 0) {
+        wcout << L"Ошибка: неверная длительность разговора!" << endl;
+        return;
+    }
+    
+    double cost = TARIFFS[from_op-1][to_op-1] * duration;
+    
+    wcout << L"\nРезультат расчета:" << endl;
+    wcout << L"Оператор отправителя: " << OPERATORS[from_op-1] << endl;
+    wcout << L"Оператор получателя: " << OPERATORS[to_op-1] << endl;
+    wcout << L"Длительность: " << duration << L" мин" << endl;
+    wcout << L"Стоимость разговора: " << cost << L" руб." << endl;
+    wcout << endl;
+}
+
+// Задание 3: Зарплата программиста
+void task3() {
+    wcout << L"=== ЗАДАНИЕ 3: Зарплата программиста ===" << endl;
+    
+    const double SALARY_PER_100_LINES = 50.0;
+    const double FINE_PER_LATENESS = 20.0;
+    
+    int choice;
+    wcout << L"Меню:" << endl;
+    wcout << L"1 - Расчет строк кода по доходу и опозданиям" << endl;
+    wcout << L"2 - Расчет допустимых опозданий по коду и зарплате" << endl;
+    wcout << L"3 - Расчет зарплаты по коду и опозданиям" << endl;
+    wcout << L"Выберите пункт меню (1-3): ";
+    wcin >> choice;
+    
+    switch (choice) {
+        case 1: {
+            double desired_income;
+            int lateness_count;
+            
+            wcout << L"Введите желаемый доход ($): ";
+            wcin >> desired_income;
+            wcout << L"Введите количество опозданий: ";
+            wcin >> lateness_count;
+            
+            // Штрафы начисляются за каждое третье опоздание
+            int fined_latenesses = lateness_count / 3;
+            double total_fine = fined_latenesses * FINE_PER_LATENESS;
+            
+            // Нужный доход с учетом штрафов
+            double needed_income = desired_income + total_fine;
+            
+            // Расчет строк кода
+            double lines_of_code = (needed_income / SALARY_PER_100_LINES) * 100;
+            
+            wcout << L"\nРезультат:" << endl;
+            wcout << L"Штраф за опоздания: " << total_fine << L"$" << endl;
+            wcout << L"Необходимо написать: " << ceil(lines_of_code) << L" строк кода" << endl;
+            break;
+        }
+        
+        case 2: {
+            int lines_of_code;
+            double desired_salary;
+            
+            wcout << L"Введите количество строк кода: ";
+            wcin >> lines_of_code;
+            wcout << L"Введите желаемую зарплату ($): ";
+            wcin >> desired_salary;
+            
+            // Зарплата без учета штрафов
+            double base_salary = (lines_of_code / 100.0) * SALARY_PER_100_LINES;
+            
+            if (base_salary < desired_salary) {
+                wcout << L"Невозможно достичь желаемой зарплаты с таким количеством кода!" << endl;
+            } else {
+                // Максимально допустимый штраф
+                double max_fine = base_salary - desired_salary;
+                // Максимальное количество опозданий с учетом штрафа за каждое третье
+                int max_latenesses = (max_fine / FINE_PER_LATENESS) * 3;
+                
+                wcout << L"\nРезультат:" << endl;
+                wcout << L"Зарплата без штрафов: " << base_salary << L"$" << endl;
+                wcout << L"Максимальное количество опозданий: " << max_latenesses << endl;
+            }
+            break;
+        }
+        
+        case 3: {
+            int lines_of_code;
+            int lateness_count;
+            
+            wcout << L"Введите количество
