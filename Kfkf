@@ -152,4 +152,73 @@ void task3() {
             int lines_of_code;
             int lateness_count;
             
-            wcout << L"Введите количество
+            wcout << L"Введите количество строк кода: ";
+            wcin >> lines_of_code;
+            wcout << L"Введите количество опозданий: ";
+            wcin >> lateness_count;
+            
+            // Расчет базовой зарплаты
+            double base_salary = (lines_of_code / 100.0) * SALARY_PER_100_LINES;
+            
+            // Расчет штрафов
+            int fined_latenesses = lateness_count / 3;
+            double total_fine = fined_latenesses * FINE_PER_LATENESS;
+            
+            // Итоговая зарплата
+            double final_salary = base_salary - total_fine;
+            
+            wcout << L"\nРезультат:" << endl;
+            wcout << L"Базовая зарплата: " << base_salary << L"$" << endl;
+            wcout << L"Штраф за опоздания: " << total_fine << L"$" << endl;
+            wcout << L"Итоговая зарплата: " << final_salary << L"$" << endl;
+            
+            if (final_salary <= 0) {
+                wcout << L"Васе не заплатят! Итоговая зарплата отрицательная." << endl;
+            } else {
+                wcout << L"Васе заплатят " << final_salary << L"$" << endl;
+            }
+            break;
+        }
+        
+        default:
+            wcout << L"Ошибка: неверный пункт меню!" << endl;
+    }
+    wcout << endl;
+}
+
+int main() {
+    // Установка локали для поддержки русского языка
+    setlocale(LC_ALL, "ru_RU.UTF-8");
+    
+    int task_choice;
+    
+    do {
+        wcout << L"Выберите задание для выполнения:" << endl;
+        wcout << L"1 - Определение типа символа" << endl;
+        wcout << L"2 - Расчет стоимости разговора" << endl;
+        wcout << L"3 - Зарплата программиста" << endl;
+        wcout << L"0 - Выход" << endl;
+        wcout << L"Ваш выбор: ";
+        wcin >> task_choice;
+        
+        switch (task_choice) {
+            case 1:
+                task1();
+                break;
+            case 2:
+                task2();
+                break;
+            case 3:
+                task3();
+                break;
+            case 0:
+                wcout << L"Выход из программы." << endl;
+                break;
+            default:
+                wcout << L"Неверный выбор! Попробуйте снова." << endl;
+        }
+        
+    } while (task_choice != 0);
+    
+    return 0;
+} 
