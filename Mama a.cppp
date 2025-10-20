@@ -1,61 +1,58 @@
 #include <iostream>
-#include <iomanip>
+using namespace std;
 
 int main() {
-    double pricePerKg;
+    double price;
     
-    std::wcout << L"Введите цену за 1 кг конфет: ";
-    std::cin >> pricePerKg;
+    cout << "Введите цену за 1 кг конфет: ";
+    cin >> price;
     
-    std::wcout << L"\nСтоимость конфет:\n";
-    std::wcout << std::fixed << std::setprecision(2);
-    
-    int weight = 100; // начальный вес в граммах
-    while (weight <= 1000) {
-        double cost = (pricePerKg * weight) / 1000.0;
-        std::wcout << weight << L"г: " << cost << L" руб.\n";
-        weight += 100;
-    }
-    
-    return 0;
-}
-#include <iostream>
-
-int main() {
-    int number;
-    
-    std::wcout << L"Введите целое число: ";
-    std::cin >> number;
-    
-    std::wcout << L"\nРезультат:\n";
-    
-    int count = 1;
-    while (count <= 10) {
-        std::wcout << number + count << L" ";
-        count++;
-    }
-    std::wcout << L"\n";
-    
-    return 0;
-#include <iostream>
-#include <iomanip>
-
-int main() {
-    double pricePerKg;
-    
-    std::wcout << L"Введите цену за 1 кг конфет: ";
-    std::cin >> pricePerKg;
-    
-    std::wcout << L"\nСтоимость конфет:\n";
-    std::wcout << std::fixed << std::setprecision(2);
-    
+    cout << "Стоимость конфет:\n";
     int kg = 1;
     while (kg <= 10) {
-        double cost = pricePerKg * kg;
-        std::wcout << kg << L" кг: " << cost << L" руб.\n";
+        double cost = price * kg;
+        cout << kg << " кг: " << cost << " руб.\n";
         kg++;
     }
     
     return 0;
 }
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    double price;
+    
+    cout << "Введите цену за 1 кг конфет: ";
+    cin >> price;
+    
+    cout << "Стоимость конфет:\n";
+    int grams = 100;
+    do {
+        double cost = (price * grams) / 1000;
+        cout << grams << "г: " << cost << " руб.\n";
+        grams += 100;
+    } while (grams <= 1000);
+    
+    return 0;
+}
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int number;
+    
+    cout << "Введите целое число: ";
+    cin >> number;
+    
+    cout << "Результат:\n";
+    int i = 1;
+    while (i <= 10) {
+        cout << number + i << " ";
+        i++;
+    }
+    
+    return 0;
 }
