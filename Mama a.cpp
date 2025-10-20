@@ -23,6 +23,63 @@
     }
 
 
-4) Написать программу. Пользователь вводит с клавиатуры цену 1 кг конфет (вещественное число). Вывести экран стоимость 100г, 200г,..., 1 кг конфет.
 
-5) Написать программу. Пользователь вводит с клавиатуры целое число. Программа выводит на экран это число, а так-же ещё 10 целых чисел по принципу: введённое число + 1, введённое число 2, введённое число + 3, введённое число 4, и т. д.
+
+    int price_per_kg;
+    std::wcout << L"Введите цену 1 кг конфет (в рублях): ";
+    std::wcin >> price_per_kg;
+
+
+     std::wcout << L"\nСтоимость конфет:\n";
+
+
+     int grams = 100;
+
+    do {
+            double kg = grams / 1000.0;
+            double cost = price_per_kg * kg;
+
+            std::wcout << grams << L" г: "
+                       << std::fixed << std::setprecision(2)
+                       << cost << L" руб.\n";
+
+            grams += 100;
+        } while (grams <= 1000);
+
+        return 0;
+    }
+
+
+        int number;
+
+
+        std::wcout << L"Введите целое число: ";
+        std::wcin >> number;
+
+
+        std::wcout << L"Введённое число: " << number << L"\n";
+
+
+        int counter = 1;
+        int step = 1;
+        int current = number;
+
+        do {
+
+            if (step % 2 == 1) {
+                current = number + step;
+            } else {
+                current = number - step;
+            }
+
+
+            std::wcout << current << L"\n";
+
+
+            counter++;
+            step++;
+        } while (counter <= 10);
+
+        return 0;
+    }
+
