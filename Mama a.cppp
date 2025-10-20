@@ -2,49 +2,60 @@
 #include <iomanip>
 
 int main() {
-    double price;
-    std::wcout << L"Введите цену 1 кг конфет: ";
-    std::cin >> price;
+    double pricePerKg;
+    
+    std::wcout << L"Введите цену за 1 кг конфет: ";
+    std::cin >> pricePerKg;
     
     std::wcout << L"\nСтоимость конфет:\n";
-    for (int kg = 1; kg <= 10; kg++) {
-        std::wcout << kg << L" кг: " << std::fixed << std::setprecision(2) 
-                  << price * kg << L" руб.\n";
+    std::wcout << std::fixed << std::setprecision(2);
+    
+    int weight = 100; // начальный вес в граммах
+    while (weight <= 1000) {
+        double cost = (pricePerKg * weight) / 1000.0;
+        std::wcout << weight << L"г: " << cost << L" руб.\n";
+        weight += 100;
     }
     
     return 0;
 }
-#include <iostream>
-#include <iomanip>
-
-int main() {
-    double price;
-    std::wcout << L"Введите цену 1 кг конфет: ";
-    std::cin >> price;
-    
-    std::wcout << L"\nСтоимость конфет:\n";
-    for (int grams = 100; grams <= 1000; grams += 100) {
-        double cost = price * grams / 1000.0;
-        std::wcout << grams << L" г: " << std::fixed << std::setprecision(2) 
-                  << cost << L" руб.\n";
-    }
-    
-    return 0;
-}
-
 #include <iostream>
 
 int main() {
     int number;
+    
     std::wcout << L"Введите целое число: ";
     std::cin >> number;
     
     std::wcout << L"\nРезультат:\n";
-    for (int i = 0; i <= 10; i++) {
-        std::wcout << number + i;
-        if (i < 10) std::wcout << L", ";
+    
+    int count = 1;
+    while (count <= 10) {
+        std::wcout << number + count << L" ";
+        count++;
     }
-    std::wcout << std::endl;
+    std::wcout << L"\n";
     
     return 0;
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    double pricePerKg;
+    
+    std::wcout << L"Введите цену за 1 кг конфет: ";
+    std::cin >> pricePerKg;
+    
+    std::wcout << L"\nСтоимость конфет:\n";
+    std::wcout << std::fixed << std::setprecision(2);
+    
+    int kg = 1;
+    while (kg <= 10) {
+        double cost = pricePerKg * kg;
+        std::wcout << kg << L" кг: " << cost << L" руб.\n";
+        kg++;
+    }
+    
+    return 0;
+}
 }
