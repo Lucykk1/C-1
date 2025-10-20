@@ -50,36 +50,31 @@
     }
 
 
-        int number;
-
+   int number;
 
         std::wcout << L"Введите целое число: ";
         std::wcin >> number;
 
-
         std::wcout << L"Введённое число: " << number << L"\n";
-
 
         int counter = 1;
         int step = 1;
         int current = number;
+        bool is_addition = true;
 
         do {
-
-            if (step % 2 == 1) {
+            if (is_addition) {
                 current = number + step;
             } else {
                 current = number - step;
             }
 
-
             std::wcout << current << L"\n";
-
 
             counter++;
             step++;
+            is_addition = !is_addition;
         } while (counter <= 10);
 
         return 0;
     }
-
