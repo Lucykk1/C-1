@@ -83,3 +83,40 @@ std:wcin.imbue(std::locale("en_US.UTF-8"));
 
         return 0;
     }
+
+
+
+2)   int n;
+        std::wcout << L"Введите количество чисел: ";
+        std::wcin >> n;
+
+        int num;
+        int countZeros = 0;
+        int sumBetween = 0;
+
+
+        int i = 0;
+        while (i < n) {
+            std::wcout << L"Введите число: ";
+            std::wcin >> num;
+
+            switch(countZeros){
+            case 0:{
+                if (num == 0) countZeros = 1;
+                break;
+            }
+            case 1:{
+                sumBetween += num;
+                if (num == 0) countZeros = 2;
+                break;
+            }
+            }
+
+            i++;
+        }
+ std::wcout << L"Сумма чисел между первыми двумя нулями: " << sumBetween << L'.'<< std::endl;
+
+
+        return 0;
+    }
+
