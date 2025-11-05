@@ -21,3 +21,23 @@ int main() {
 
     return 0;
 }
+
+#include <iostream>
+#include <cmath> // для log()
+
+using namespace std;
+
+int main() {
+    double a = 0.1, b = 1.0, h = 0.1; // границы и шаг
+    double x, f;
+
+    cout << " x\tf(x)" << endl;
+
+    for (x = a; x <= b; x += h) {
+        f = log(1 + x) / x;
+        cout << x << "\t" << f << endl;
+    }
+
+    return 0;
+}
+
