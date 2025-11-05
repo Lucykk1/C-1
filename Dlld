@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cmath> // для sqrt и pow
+
+using namespace std;
+
+int main() {
+    int N;
+    double x;
+    cout << "Введите N: ";
+    cin >> N;
+    cout << "Введите x: ";
+    cin >> x;
+
+    double f = 0.0; // сумма
+
+    for (int i = 1; i <= N; i++) {
+        f += pow(1.0 / i, 3) * sqrt(x / i);
+    }
+
+    cout << "f(x) = " << f << endl;
+
+    return 0;
+}
