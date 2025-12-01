@@ -1,0 +1,41 @@
+CREATE TABLE students(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  phone TEXT NULL
+  );
+
+CREATE TABLE Customers (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ first_name TEXT NOT NULL,
+ last_name TEXT NOT NULL,
+ phone TEXT NULL UNIQUE 
+ );
+
+ CREATE TABLE Orders (
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   Customer_id  INTEGER,
+   orders_date TEXT,
+   FOREIGN KEY (Customer_id) REFERENCES Customers (id)
+   );
+
+   INSERT INTO Customers ( first_name, last_name, phone)
+   VALUES
+   ('Liza','Mischenko','+709128928'),
+   ('Maksim','Zyev','+709134928'), 
+   ('Lusine','Kazaryan','+709878928');
+
+   INSERT INTO students (name, phone)
+   VALUES
+   ('Maksim','+3468728989'),
+   ('Liza', '+6348462393'),
+   ('Lusine','+48763860');
+
+   INSERT INTO Orders(Customer_id, orders_date)
+   VALUES
+   (1,'2025-11-11'),
+   (2,'2011-09-13'),
+   (3,'2010-09-10');
+
+
+SELECT * FROM Orders 
+JOIN Customers ON Orders.Customer_id=Customers.id;
