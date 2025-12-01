@@ -1,0 +1,27 @@
+CREATE TABLE BOOKS(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  book_name TEXT NOT NUll,
+  Autor TEXT NOT NULL,
+  Genre TEXT NOT NULL,
+  year INTEGER NOT NULL
+  );
+
+INSERT INTO BOOKS (book_name, Autor, Genre, year)
+VALUES
+('WAR AND PEACE','Tolstoy','An epic novel', 1820),
+('Ten Little Niggers','Agata Kristi','detective novel', 1930),
+('Murder on the Orient Express','Agata Kristi','detective novel', 1933);
+
+CREATE TABLE BOOK_CARD (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+card_number TEXT NOT NULL,
+card_present_data TEXT NOT NULL,
+Card_end_data TEXT NOT NULL,
+Oner TEXT NOT NULL
+FOREIGN KEY ();
+
+INSERT INTO BOOK_CARD (card_number , card_present_data , Card_end_data , Oner)
+VALUES
+('346823648','2025-11-13','1015-11-15', 'Liza Mishcenko'),
+('6346246','2014-10-12','2025-11-12', 'Maksim Zyev'),
+('47207474092','219-09-12','2020-11-10', 'Lusine);
