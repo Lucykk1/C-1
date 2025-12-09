@@ -16,11 +16,12 @@ int main()
 {
     for (int i = 0; i < N; i++) arr[i] = 1;
 
-    long long sum1, sum2;
+    long long sum1, sum2, sum3;
     auto start_time = chrono::high_resolution_clock::now();
 
-    thread t1([&]() { sum1 = partial_sum(0, N / 2); });
-    thread t2([&]() { sum2 = partial_sum(N / 2, N); });
+    thread t1([&]() { sum1 = partial_sum(0, N / 3); });
+    thread t2([&]() { sum2 = partial_sum(N / 3, * 3, N); });
+    thread t3([&]() { sum2 = partial_sum(N / 3, N); });
 
     t1.join();
     t2.join();
